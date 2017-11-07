@@ -22,7 +22,7 @@ The easiest is if create a subfolder called `data` and place all the `.nc` files
 
 ## Python & Dependencies
 
-The Code was developed and run using `Python 3.6.1`. Furthermore, the following additional Python packages are necessary. The version numbers correspond to the ones I used during the development.
+The Code was developed on an `64bit Ubuntu 16.04 LTS` using `Python 3.6.1`. Furthermore, the following additional Python packages are necessary. The version numbers correspond to the ones I used during the development.
 
 * `numpy 1.12.1`
 * `scipy 0.19.0`
