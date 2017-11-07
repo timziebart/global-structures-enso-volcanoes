@@ -84,7 +84,7 @@ transitivity and global average link distance (Fig. 2(a) and (c) in [1]):
 
 modularity (Fig. 2(b) in [1]):
 ```
-/paper-pix.py Output.FullRun.normal-modularity.icosahedral.hdf5 icosahedral ENSO-global --save
+./paper-pix.py Output.FullRun.normal-modularity.icosahedral.hdf5 icosahedral ENSO-global --save
 ```
 
 composites (Fig. 3 in [1]):
