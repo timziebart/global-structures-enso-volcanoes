@@ -6,7 +6,7 @@ This repository was created to publish the code for the analysis in [1]. It is m
 
 # Prerequesites
 
-# The Repository
+## The Repository
 
 Please clone the repository and then go inside (for the following commands to work).
 ```
