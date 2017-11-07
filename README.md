@@ -4,7 +4,7 @@ This repository was created to publish the code for the analysis in [1]. It is m
 
 *Disclaimer: As the main goal of this code publication is the reproduction of the results in [1], the code is not well-documented. If you wish to use this work as a basis for your own work, please contact me (Tim.Kittel@pik-potsdam.de) .*
 
-# Prerequesites
+# Prerequisites
 
 ## The Repository
 
