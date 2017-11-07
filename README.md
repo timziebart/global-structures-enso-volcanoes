@@ -27,7 +27,7 @@ The Code was developed on an `64bit Ubuntu 16.04 LTS` using `Python 3.6.1`. Furt
 * `numpy 1.12.1`
 * `scipy 0.19.0`
 * `matplotlib 2.0.2`
-* `basemap `1.1.0`
+* `basemap 1.1.0`
 * `pandas 0.20.1`
 * `argcomplete 1.8.2`
 * `igraph 0.7.1.post6`
