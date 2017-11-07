@@ -1,0 +1,25 @@
+
+# Data Files (Input, Output, Cache)
+data/
+*.hdf5
+*.hdf5.mpi-*
+/.icosahedral-grid.cache.npy
+
+# PyCharm Config
+.idea/
+
+# Python Cache
+__pycache__/
+*/__pycache__/
+
+# Jupyter Notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Cluster log files
+*.err
+*.out
+
+# picture output
+*.pdf
+*.jpg
