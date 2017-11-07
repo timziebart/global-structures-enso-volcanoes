@@ -14,6 +14,8 @@ git clone https://github.com/timkittel/global-structures-enso-volcanoes.git
 cd global-structures-enso-volcanoes
 ```
 
+Note that `detrend.nino34.ascii.txt` was downloaded from [NCEP](http://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_change.shtml) (see link in the lower left corner, here is a [direct link](http://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/detrend.nino34.ascii.txt), accessed Nov 4, 2017) and all rights belong there.
+
 ## Data
 
 As detailed in [1] this project uses the **daily averaged surface air temperature data (SAT at sigma=0.995)** of the [NCEP/NCAR Reanalysis I Project](https://www.esrl.noaa.gov/psd/data/reanalysis/reanalysis.shtml). (They provide [ftp download servers](ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.dailyavgs/surface/) and you basically need all the files `air.sig995.1948.nc` until `air.sig995.2015.nc`.)
