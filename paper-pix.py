@@ -361,7 +361,7 @@ def plot_volcano_timeseries():
             print(f"saving {fname} ... ", end="", flush=True)
             fig.savefig(fname, dpi=200)
             print("done")
-        break # to do it only once for testing
+        # break # to do it only once for testing
 
 
 

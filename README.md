@@ -104,7 +104,7 @@ analysis of volcanoes (Fig. 5 in [1]):
 
 comparison of the community detection algorithms
 ```
-./paper-pix.py Output.FullRun.normal-cmp-modularity.icosahedral.hdf5 icosahedral cmp-modularity
+./paper-pix.py Output.FullRun.normal-cmp-modularity.icosahedral.hdf5 icosahedral cmp-modularity --save
 ```
 
 # References
