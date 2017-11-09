@@ -68,8 +68,6 @@ volcano_color_shift = "red"
 #     print(f"{volc['name']:<12}: {volc['location']!s:<40} eruption {volc['eruption']!s}   shift {volc['shift']!s:<40} {volc['delay']:>3} days")
 
 
-
-
 big2loc = locs.rectangle_from_infsup(dict(
     lat_inf=-30.0, lat_sup=10.0,
     lon_inf=180, lon_sup=-60,
@@ -301,6 +299,10 @@ def plot_volcano_timeseries():
         else:
             fig.text(0.58, 0.795, label_map)
 
+
+
+
+
         marker_eruption_style = dict(color = "purple", lw=2, zorder=0)
         marker_signature_style = dict(color="green", lw=2, zorder=1)
 
@@ -319,6 +321,7 @@ def plot_volcano_timeseries():
         title = r"$k_{\textrm{" + volcanos[volcanoname]['shortname'] + r"}}$"
         fig.text(0.005, 0.75, f"{title}", ha="left", va="center", rotation=90, multialignment="center")
         ax.set_xlim((begin_date, end_date))
+
 
         if volcanoname in YLIMS:
             ax_shift.set_ylim(YLIMS[volcanoname])
@@ -348,6 +351,21 @@ def plot_volcano_timeseries():
             # off_txt.set_position((1, 0))
             cbar.update_ticks()
 
+        if args.histograms:
+            hist_name = f"histogram-{name}"
+            hist_fig = plt.figure(hist_name)
+            hist_ax = hist_fig.add_subplot(111)
+            data.timeseries[name].hist(ax=hist_ax, figure=hist_fig, bins=30)
+            hist_ax.set_xlabel(hist_name)
+            hist_ax.set_ylabel("count")
+            hist_shift_name = f"histogram-shifted-{name}"
+            hist_shift_fig = plt.figure(hist_shift_name)
+            hist_shift_ax = hist_shift_fig.add_subplot(111)
+            data.timeseries[shift_name].hist(ax=hist_shift_ax, figure=hist_shift_fig, bins=30)
+            hist_shift_ax.set_xlabel(hist_shift_name)
+            hist_shift_ax.set_ylabel("count")
+
+
         patchBig_style = dict(
             fill=True,
             color="white",
@@ -356,11 +374,19 @@ def plot_volcano_timeseries():
         data.draw_map_rectangle(big2loc, m=m, style=patchBig_style)
 
         if args.save:
-            # fname = name+".pdf"
             fname = name+".jpg"
             print(f"saving {fname} ... ", end="", flush=True)
             fig.savefig(fname, dpi=200)
             print("done")
+            if args.histograms:
+                hist_fname = f"{hist_name}.pdf"
+                print(f"saving {hist_fname}", end="", flush=True)
+                hist_fig.savefig(hist_fname)
+                print('done')
+                hist_shift_fname = f"{hist_shift_name}.pdf"
+                print(f"saving {hist_shift_fname}", end="", flush=True)
+                hist_shift_fig.savefig(hist_shift_fname)
+                print('done')
         # break # to do it only once for testing
 
 
@@ -637,6 +663,11 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "--histograms", action="store_true",
+        help="plot additionally histograms (only implemented for mode=volcanoes at the moment)"
+    )
+
+    parser.add_argument(
         "--no-show", action="store_false", dest="show",
         help="do not show the plots"
     )
@@ -651,6 +682,9 @@ if __name__ == "__main__":
 
     if not os.path.isfile(args.input_file):
         parser.error(f"{args.input_file} is not a file")
+
+    if "volcanoes" not in args.modes and args.histograms:
+        parser.error("'--histograms' is implemented for the 'volanoes' mode only")
 
     filename = args.input_file
 
