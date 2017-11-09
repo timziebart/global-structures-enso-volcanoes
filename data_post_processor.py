@@ -207,6 +207,7 @@ class DataPostProcessor(mp.MapPlotter):
             show_ENSO=True,
             dropna=False,
             xlabel="",
+            title_fontsize=22,
             **plot_kwargs
     ):
         assert name in self.timeseries, \
@@ -241,7 +242,7 @@ class DataPostProcessor(mp.MapPlotter):
 
         # ax.set_ylabel(title)
         if add_title:
-            fig.text(0.033, 0.5, f"{title}", ha="right", va="center", rotation=90, multialignment="center", fontsize=26)
+            fig.text(0.033, 0.5, f"{title}", ha="right", va="center", rotation=90, multialignment="center", fontsize=title_fontsize)
         if add_label and label:
             fig.text(0, 0.9, "({label})".format(**locals()))
 

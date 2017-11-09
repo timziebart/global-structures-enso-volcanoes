@@ -22,6 +22,8 @@ import os
 rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
 rc('text', usetex=True)
 
+TS_YLABEL_FONTSIZE = 22
+TS_SUBSCRIPT_LATEX_FONTSIZE = "\Large{}"
 
 volcanos = {
     "agung": dict(
@@ -168,7 +170,8 @@ def plot_global_timeseries():
         fig, ax = data.plot_timeseries(
             name,
             meta_data=TIMESERIES_GLOBAL_META_DATA[name],
-            add_label=True
+            add_label=True,
+            title_fontsize=TS_YLABEL_FONTSIZE,
         )
         if args.save:
             fname = name+".pdf"
@@ -182,12 +185,12 @@ def plot_global_timeseries():
         data.delete_timeseries(name)
 
 TIMESERIES_LOCAL_ENSO_META_DATA = {
-    "nino-3-4-region-degree-field" : ("a", r"$k_{\textrm{Ni{\~{n}}o3.4}}$"),
-    "nino-3-region-degree-field" : ("b", r"$k_{\textrm{Ni{\~{n}}o3}}$"),
-    "nino-4-region-degree-field" : ("c", r"$k_{\textrm{Ni{\~{n}}o4}}$"),
-    "nino-3-4-region-avg-link-length-field" : ("d", r"$d_{\textrm{Ni{\~{n}}o3.4}}$"),
-    "nino-3-region-avg-link-length-field" : ("e", r"$d_{\textrm{Ni{\~{n}}o3}}$"),
-    "nino-4-region-avg-link-length-field" : ("f", r"$d_{\textrm{Ni{\~{n}}o4}}$"),
+    "nino-3-4-region-degree-field" : ("a", r"$k_{\textrm{"+TS_SUBSCRIPT_LATEX_FONTSIZE+r"Ni{\~{n}}o3.4}}$"),
+    "nino-3-region-degree-field" : ("b", r"$k_{\textrm{"+TS_SUBSCRIPT_LATEX_FONTSIZE+r"Ni{\~{n}}o3}}$"),
+    "nino-4-region-degree-field" : ("c", r"$k_{\textrm{"+TS_SUBSCRIPT_LATEX_FONTSIZE+r"Ni{\~{n}}o4}}$"),
+    "nino-3-4-region-avg-link-length-field" : ("d", r"$d_{\textrm{"+TS_SUBSCRIPT_LATEX_FONTSIZE+r"Ni{\~{n}}o3.4}}$"),
+    "nino-3-region-avg-link-length-field" : ("e", r"$d_{\textrm{"+TS_SUBSCRIPT_LATEX_FONTSIZE+r"Ni{\~{n}}o3}}$"),
+    "nino-4-region-avg-link-length-field" : ("f", r"$d_{\textrm{"+TS_SUBSCRIPT_LATEX_FONTSIZE+r"Ni{\~{n}}o4}}$"),
     # "nino-3-4-region-degree-field" : ("a", "ENSO 3.4\nAvg. Degree"),
     # "nino-3-region-degree-field" : ("b", "ENSO 3\nAvg. Degree"),
     # "nino-4-region-degree-field" : ("c", "ENSO 4\nAvg. Degree"),
@@ -211,7 +214,8 @@ def plot_local_enso_timeseries():
         fig, ax = data.plot_timeseries(
             name,
             meta_data=TIMESERIES_LOCAL_ENSO_META_DATA[name],
-            add_label=True
+            add_label=True,
+            title_fontsize=TS_YLABEL_FONTSIZE,
         )
         if args.save:
             fname = name+".pdf"
@@ -312,20 +316,28 @@ def plot_volcano_timeseries():
 
         if volcanoname in YLIMS:
             ax.set_ylim(YLIMS[volcanoname])
-        data.plot_timeseries(name, ax=ax, meta_data=("", ""))
+        data.plot_timeseries(
+            name,
+            ax=ax,
+            meta_data=("", ""),
+        )
         ylim = ax.get_ylim()
         ax.plot([mdates.date2num(date_eruption)]*2, ylim, **marker_eruption_style)
         ax.plot([mdates.date2num(date_signature)]*2, ylim, **marker_signature_style)
         ax.set_ylim(ylim)
         # title = volcanos[volcanoname]["name"] + "\n Avg. Degree"
-        title = r"$k_{\textrm{" + volcanos[volcanoname]['shortname'] + r"}}$"
+        title = r"$k_{\textrm{" + TS_SUBSCRIPT_LATEX_FONTSIZE + volcanos[volcanoname]['shortname'] + r"}}$"
         fig.text(0.005, 0.75, f"{title}", ha="left", va="center", rotation=90, multialignment="center")
         ax.set_xlim((begin_date, end_date))
 
 
         if volcanoname in YLIMS:
             ax_shift.set_ylim(YLIMS[volcanoname])
-        data.plot_timeseries(shift_name, ax=ax_shift, meta_data=("", ""))
+        data.plot_timeseries(
+            shift_name,
+            ax=ax_shift,
+            meta_data=("", ""),
+        )
         ylim = ax_shift.get_ylim()
         ax_shift.plot([mdates.date2num(date_eruption)]*2, ylim, **marker_eruption_style)
         ax_shift.plot([mdates.date2num(date_signature)]*2, ylim, **marker_signature_style)
@@ -334,7 +346,7 @@ def plot_volcano_timeseries():
         # line.set_zorder(3)
         # print(line, line.get_zorder())
         # title = volcanos[volcanoname]["name"] + " Shift\n Avg. Degree"
-        title = r"$k^\prime_{\textrm{" + volcanos[volcanoname]['shortname'] + r"}}$"
+        title = r"$k^\prime_{\textrm{" + TS_SUBSCRIPT_LATEX_FONTSIZE + volcanos[volcanoname]['shortname'] + r"}}$"
         fig.text(0.005, 0.25, f"{title}", ha="left", va="center", rotation=90, multialignment="center")
         ax_shift.set_xlim((begin_date, end_date))
 
