@@ -286,9 +286,13 @@ if __name__ == "__main__":
         ga.RESULT_FIELDS = []
         ga.RESULT_ARRAYS = [ga.MODULARITY_PREFIX + algo_name for algo_name in ga.AVAILABLE_COMMUNITY_ALGORITHMS]
     elif args.script_mode == sensitivity_test_bottom:
+        assert run_type == "normal", "use with run_type normal to avoid excessive run times"
         DEFAULT_RUN_INFO["cut-off-percentage"] = 0.001
+        ga.RESULT_ARRAYS.append("modularity-walktrap")
     elif args.script_mode == sensitivity_test_top:
+        assert run_type == "normal", "use with run_type normal to avoid excessive run times"
         DEFAULT_RUN_INFO["cut-off-percentage"] = 0.025
+        ga.RESULT_ARRAYS.append("modularity-walktrap")
     else:
         parser.error("unknown scipt-mode given ... that shouldn't happen, is it a bug?")
 
