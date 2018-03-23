@@ -225,10 +225,14 @@ grid_choices = list(map(operator.attrgetter("name"), RunGrids))
 paper_mode = "paper"
 modularity_mode = "modularity"
 comparison_modularity_mode = "comparison-modularity"
+sensitivity_test_bottom = "sensitivity-test-bottom"
+sensitivity_test_top = "sensitivity-test-top"
 available_script_modes = [
     paper_mode,
     modularity_mode,
     comparison_modularity_mode,
+    sensitivity_test_bottom,
+    sensitivity_test_top,
 ]
 
 if __name__ == "__main__":
@@ -281,17 +285,25 @@ if __name__ == "__main__":
         assert run_type == "normal", "use with run_type normal to avoid excessive run times"
         ga.RESULT_FIELDS = []
         ga.RESULT_ARRAYS = [ga.MODULARITY_PREFIX + algo_name for algo_name in ga.AVAILABLE_COMMUNITY_ALGORITHMS]
+    elif args.script_mode == sensitivity_test_bottom:
+        DEFAULT_RUN_INFO["cut-off-percentage"] = 0.001
+    elif args.script_mode == sensitivity_test_top:
+        DEFAULT_RUN_INFO["cut-off-percentage"] = 0.025
     else:
         parser.error("unknown scipt-mode given ... that shouldn't happen, is it a bug?")
 
     if args.output is None:
         run_type_name = run_type
-        if args.script_mode == paper_mode:
-            run_type_name += "-paper"
-        elif args.script_mode == modularity_mode:
-            run_type_name += "-modularity"
-        elif args.script_mode == comparison_modularity_mode:
-            run_type_name += "-cmp-modularity"
+        if args.script_mode:
+            run_type_name += "-" + args.script_mode
+        # if args.script_mode == paper_mode:
+        #     run_type_name += "-paper"
+        # elif args.script_mode == modularity_mode:
+        #     run_type_name += "-modularity"
+        # elif args.script_mode == comparison_modularity_mode:
+        #     run_type_name += "-cmp-modularity"
+        # else:
+        #     raise NotImplementedError(f"not automatic file name creation for script-mode {args.scipt_mode!r} provided yet")
         args.output = f"Output.FullRun.{run_type_name}.{args.grid}.hdf5"
         # args.output = "{}.FullRun.{}.{}.hdf5".format(
         #     ("Cluster" if myconf.ON_CLUSTER else "Laptop"),
